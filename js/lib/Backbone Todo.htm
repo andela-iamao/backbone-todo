@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!-- saved from url=(0079)http://localhost:63343/backbone-todo/index.html?_ijt=mes5tqlbba0mj3lt37s6210l5m -->
+<html lang="en" data-ember-extension="1"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style id="stndz-style"></style>
+    
+    <title>Backbone Todo</title>
+    <link rel="stylesheet" href="./Backbone Todo_files/uikit.min.css">
+    <link rel="stylesheet" href="./Backbone Todo_files/main.css">
+</head>
+<body cz-shortcut-listen="true">
+<div class="uk-inline uk-dark" id="full-window">
+    <img src="./Backbone Todo_files/maxresdefault.jpg" alt="">
+    <div class="uk-overlay-default uk-position-cover">
+        <div class="uk-position-center" id="half-width">
+            <section id="todoapp">
+                <header id="header " class="uk-text-center">
+                    <h1>Me.Todo</h1>
+                    <input class="uk-input uk-text-center" id="new-todo" placeholder="What needs to be done?" autofocus="">
+                </header>
+                <section id="main">
+                    <input id="toggle-all" type="checkbox">
+                    <label for="toggle-all">Mark all as complete</label>
+                    <ul id="todo-list"></ul>
+                </section>
+                <footer id="footer"></footer>
+            </section>
+            <div id="info">
+                <p>Double-click to edit a todo</p>
+                <p>Written by <a href="https://github.com/addyosmani">Addy Osmani</a></p>
+                <p>Part of <a href="http://todomvc.com/">TodoMVC</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+    <script type="text/template" id="item-template">
+        <div class="view">
+            <input class="toggle" type="checkbox" <%= completed ? 'checked' : '' %>>
+            <label><%- title %></label>
+            <button class="destroy"></button>
+        </div>
+        <input class="edit" value="<%- title %>">
+    </script>
+    <script type="text/template" id="stats-template">
+        <span id="todo-count"><strong><%= remaining %></strong>
+            <%= remaining === 1 ? 'item' : 'items' %> left
+        </span>
+        <ul id="filters">
+            <li>
+                <a class="selected" href="#/">All</a>
+            </li>
+            <li>
+                <a href="#/active">Active</a>
+            </li>
+            <li>
+                <a href="#/completed">Completed</a>
+            </li>
+        </ul>
+        <% if (completed) { %>
+        <button id="clear-completed">Clear completed (<%= completed %>)</button>
+        <% } %>
+    </script>
+    <script src="./Backbone Todo_files/jquery-3.2.1.min.js"></script>
+    <script src="./Backbone Todo_files/underscore.js"></script>
+    <script src="./Backbone Todo_files/backbone.js"></script>
+    <script src="./Backbone Todo_files/backbone.localStorage.js"></script>
+    <script src="./Backbone Todo_files/todo.js"></script>
+    <script src="./Backbone Todo_files/todos.js"></script>
+    <script src="./Backbone Todo_files/todos(1).js"></script>
+    <script src="./Backbone Todo_files/app.js"></script>
+    <script src="./Backbone Todo_files/router.js"></script>
+    <script src="./Backbone Todo_files/app(1).js"></script>
+
+<script src="chrome-extension://hhojmcideegachlhfgfdhailpfhgknjm/web_accessible_resources/index.js"></script></body></html>
