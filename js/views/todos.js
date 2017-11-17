@@ -10,7 +10,10 @@ var TodoView = Backbone.View.extend({
   events: {
     'click .toggle': 'togglecompleted',
     'click .destroy': 'clear',
-    'dblclick label': 'edit',
+    'click .edit-btn': 'edit',
+    'click .edit-note': 'editNote',
+    'click .cancel-edit-note': 'cancelEditNote',
+    'click .show-note': 'showNote',
     'keypress .edit': 'updateOnEnter',
     'blur .edit': 'close'
   },
@@ -32,7 +35,7 @@ var TodoView = Backbone.View.extend({
   },
 
   toggleVisible: function() {
-    this.$el.toggleClass('hidden', true);
+    this.$el.toggleClass('hidden', this.isHidden());
   },
 
   isHidden: function() {
@@ -50,8 +53,32 @@ var TodoView = Backbone.View.extend({
 
   edit: function() {
     this.$el.addClass('editing');
+    this.$input.addClass('show-edit');
     this.$input[0].disabled = false;
     this.$input.focus();
+  },
+
+  showNote: function () {
+    if (this.$('div.show-edit')[0]) {
+      this.cancelEditNote();
+      return;
+    }
+    this.$('div.hide-edit').addClass('show-edit');
+    this.$('.todo-note').focus();
+  },
+
+  cancelEditNote: function () {
+    this.$('.todo-note').val('');
+    this.$('div.hide-edit').removeClass('show-edit');
+  },
+
+  editNote: function () {
+    console.log('save');
+    var note = this.$('.todo-note').val().trim();
+    if(note) {
+      this.model.save({ notes: note });
+    }
+    this.$('div.hide-edit').removeClass('show-edit');
   },
 
   close: function() {
@@ -63,6 +90,7 @@ var TodoView = Backbone.View.extend({
     }
 
     this.$el.removeClass('editing');
+    this.$input.removeClass('show-edit');
   },
 
   updateOnEnter: function(e) {

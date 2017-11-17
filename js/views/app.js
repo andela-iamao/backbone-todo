@@ -1,7 +1,7 @@
 var app = app || {};
 
 app.AppView = Backbone.View.extend({
-  el: '#todoapp',
+  el: '#grid',
 
   statsTemplate: _.template($('#stats-template').html()),
 
@@ -12,14 +12,15 @@ app.AppView = Backbone.View.extend({
   },
 
   initialize: function() {
-    this.allCheckbox = this.$('#toggle-all')[0];
-    this.$input = this.$('#new-todo');
+    this.allCheckbox = $('#toggle-all')[0];
+    this.$input = $('#new-todo');
     this.$footer = this.$('#footer');
     this.$main = this.$('#main');
 
     this.listenTo(app.Todos, 'add', this.addOne);
     this.listenTo(app.Todos, 'reset', this.addAll);
     this.listenTo(app.Todos, 'change:completed', this.filterOne);
+    this.listenTo(app.Todos, 'change:title', this.createOnEnter);
     this.listenTo(app.Todos, 'filter', this.filterAll);
     this.listenTo(app.Todos, 'all', this.render);
 
@@ -73,7 +74,8 @@ app.AppView = Backbone.View.extend({
     return {
       title: this.$input.val().trim(),
       order: app.Todos.nextOrder(),
-      completed: false
+      completed: false,
+      notes: ''
     };
   },
 

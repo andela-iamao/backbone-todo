@@ -2,12 +2,12 @@
     background-image: url("http://www.theviveur.com/wp-content/uploads/2016/08/maxresdefault.jpg");
 }
 
-#full-window {
+.full-window {
     width: 100vw;
     height: 100vh;
 }
 
-#full-window img {
+.full-window img {
     height: 100%;
 }
 
@@ -25,11 +25,11 @@
 }
 
 .list-label-title {
-    width: 60%;
+    width: 50%;
 }
 
 .list-label-actions {
-    width: 40%;
+    width: 50%;
     text-align: right;
 }
 .destroy {
@@ -48,4 +48,29 @@
 
 .hidden {
     display: none;
+}
+
+#sidebar {
+    background-color: #FFFFFF;
+    height: 100vh;
+    max-height: 100vh;
+    overflow-y: scroll;
+}
+
+.hide-edit {
+    display: none;
+}
+
+.show-edit {
+    display: block;
+}
+
+#todoapp {
+    width: 50vw;
+}
+
+#todoapp-cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

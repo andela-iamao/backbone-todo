@@ -9,22 +9,30 @@
     <script src="js/lib/uikit-icons.min.js"></script>
 </head>
 <body>
-<div class="uk-inline uk-dark" id="full-window">
+<div class="uk-inline uk-dark full-window">
     <img src="http://www.theviveur.com/wp-content/uploads/2016/08/maxresdefault.jpg" alt="">
     <div class="uk-overlay-default uk-position-cover">
-        <div class="uk-position-center" id="half-width">
-            <section id="todoapp" class="div-overflow">
-                <header id="header " class="uk-text-center">
-                    <h1>Me.Todo</h1>
-                    <input class="uk-input uk-text-center" id="new-todo" placeholder="What needs to be done?" autofocus>
-                </header>
-                <section id="main">
-                    <input id="toggle-all" type="checkbox">
-                    <label for="toggle-all">Mark all as complete</label>
+        <div class="uk-position-center ">
+            <div class="full-window" uk-grid id="grid">
+                <div class="uk-width-1-4 uk-card uk-card-default uk-card-body" id="sidebar">
+                    <div id="footer"></div>
+                    <hr />
                     <ul id="todo-list"></ul>
-                </section>
-                <footer id="footer"></footer>
-            </section>
+                </div>
+                <div class="uk-width-3-4" id="todoapp-cont" >
+                    <section id="todoapp" class="div-overflow">
+                        <header id="header " class="uk-text-center">
+                            <h1>Me.Todo</h1>
+                            <input class="uk-input uk-text-center" id="new-todo" placeholder="What needs to be done?" autofocus>
+                        </header>
+                        <section id="main">
+                            <input id="toggle-all" type="checkbox" class="uk-checkbox">
+                            <label for="toggle-all">Mark all as complete</label>
+                        </section>
+                    </section>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -35,32 +43,69 @@
                 <label><%- title %></label>
             </div>
             <div class="list-label-actions">
-                <button class="destroy uk-button-danger">
-                    <span class="uk-margin-small-right" uk-icon="icon: trash"></span>
-                </button>
+                <span class="uk-margin">
+                    <button class="uk-button-primary edit-btn">
+                        <span uk-icon="icon: pencil"></span>
+                    </button>
+                </span>
+                <span class="uk-margin">
+                    <button class="destroy uk-button-danger">
+                        <span uk-icon="icon: trash"></span>
+                    </button>
+                </span>
+                <span class="uk-margin">
+                    <button class="show-note uk-button-default">
+                        <span uk-icon="icon: comment"></span>
+                    </button>
+                </span>
             </div>
         </div>
-        <input class="edit uk-input" placeholder="<%- title %>" disabled>
+        <br />
+        <div class="hide-edit">
+            <textarea class="uk-textarea todo-note" placeholder="Notes..." ><%- notes %></textarea>
+            <div class="uk-text-right">
+                <span class="uk-margin">
+                    <button class="uk-button-default cancel-edit-note">
+                        Cancel
+                    </button>
+                </span>
+                <span class="uk-margin">
+                    <button class="edit-note uk-button-primary">
+                        Update
+                    </button>
+                </span>
+            </div>
+        </div>
+        <input class="edit uk-input hide-edit" placeholder="<%- title %>" disabled>
         <br /><br />
     </script>
     <script type="text/template" id="stats-template">
         <span id="todo-count"><strong><%= remaining %></strong>
             <%= remaining === 1 ? 'item' : 'items' %> left
         </span>
-        <ul id="filters">
-            <li>
-                <a class="selected" href="#/">All</a>
-            </li>
-            <li>
-                <a href="#/active">Active</a>
-            </li>
-            <li>
-                <a href="#/completed">Completed</a>
-            </li>
-        </ul>
+        <br />
+        <button class="uk-button uk-button-default" type="button">Filters</button>
+        <div uk-dropdown="mode: click">
+            <ul class="uk-nav uk-dropdown-nav" id="filters">
+                <li>
+                    <a class="selected" href="#/">All</a>
+                </li>
+                <li>
+                    <a href="#/active">Active</a>
+                </li>
+                <li>
+                    <a href="#/completed">Completed</a>
+                </li>
+            </ul>
+        </div>
         <% if (completed) { %>
-        <button id="clear-completed">Clear completed (<%= completed %>)</button>
+        <button id="clear-completed" class="uk-button uk-button-secondary">
+            Clear completed (<%= completed %>)
+        </button>
         <% } %>
+    </script>
+    <script type="text/template" id="note-template">
+        <p><%= note %></p>
     </script>
     <script src="js/lib/jquery-3.2.1.min.js"></script>
     <script src="js/lib/underscore.js"></script>
